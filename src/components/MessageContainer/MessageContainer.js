@@ -5,9 +5,11 @@ import { Container } from "@mui/system";
 const MessageContainer = ({ messageList, user }) => {
   return (
     <div>
+      {/* messageList 배열을 순회하면서 각 메시지 렌더링 */}
       {messageList.map((message, index) => {
         return (
-          <Container key={message._id} className="message-container">
+          // 각 메시지에 고유한 key 부여
+          <Container key={message._id || index} className="message-container">
             {/* 시스템이 주는 메세지 - ㅇㅇ님이 들어왔습니다 */}
             {message.user.name === "system" ? (
               <div className="system-message-container">
@@ -22,6 +24,7 @@ const MessageContainer = ({ messageList, user }) => {
                 <img
                   src="/profile.jpeg"
                   className="profile-image"
+                  //동일한 사용자가 연속으로 메시지를 보낸 경우, 첫 메시지에만 프로필 이미지를 표시하고 나머지 메시지에서는 숨김
                   style={
                     (index === 0
                       ? { visibility: "visible" }
